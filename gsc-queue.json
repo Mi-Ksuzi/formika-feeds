@@ -1,66 +1,86 @@
 {
- "updated": "2026-11-12",
+ "updated": "2026-11-13",
  "note": "Черга сторінок formika.store для запитів на індексування в GSC. status: pending / requested (дата) / indexed.",
  "items": [
   {
    "url": "https://formika.store/shop/3d-silikonoviy-mold-kozenyatko-2027-forma-dlya-epoksidnoi-smoli-gipsu-ta-jesmonite/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-krugloi-dlya-skrinki-shkatulki-z-epoksidnoi-smoli-na-magnitah/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-grusha-asimetrichna-dlya-pidstavok-951356-sm-tr-002/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-iris-dlya-pidvisiv-647106-sm-o-009/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-kit-dlya-broshok-53206-sm-mini-008/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-kit-dlya-pidvisiv-754906-sm-o-001/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-krevetka-dlya-broshok-554706-sm-mini-020/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-kvitka-hrizantema-dlya-pidstavok-131306-sm-ft-004/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-nabir-garbuziki-2-sht--dlya-broshok-44106-sm-mini-018/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-yabluko-dlya-pidstavok-1051106-sm-tr-004/",
    "lang": "uk",
    "type": "product",
-   "status": "pending"
+   "status": "requested",
+   "requested": "2026-11-13",
+   "checked": "2026-11-13"
   },
   {
    "url": "https://formika.store/shop/mold-silikonoviy-zhabka-dlya-broshok-425106-sm-mini-030/",
