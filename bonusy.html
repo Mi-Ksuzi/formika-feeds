@@ -1,0 +1,232 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Знижки, промокоди та подарунки до замовлення молдів Formika">
+<title>Бонуси Formika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column "order calculator" — controls on top, a scale with milestones, then what the order unlocks */
+:root{
+  --bg:#f3f1ec; --surface:#ffffff; --fg:#1e2a22; --muted:#66706a; --line:#dedad1;
+  --green:#0f5a2c; --green-soft:#e3efe6; --bronze:#a8773c; --bronze-soft:#f4e9da; --locked:#c9c5bb;
+  --display:"Unbounded","Manrope",system-ui,sans-serif; --body:"Manrope",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1d251f; --fg:#eef1ec; --muted:#9aa59e; --line:#2f3a33;
+  --green:#5fc184; --green-soft:#21382a; --bronze:#d7a868; --bronze-soft:#3a2f21; --locked:#4a534d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1d251f; --fg:#eef1ec; --muted:#9aa59e; --line:#2f3a33;
+  --green:#5fc184; --green-soft:#21382a; --bronze:#d7a868; --bronze-soft:#3a2f21; --locked:#4a534d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:640px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+.brand{font-family:var(--display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,6vw,34px);line-height:1.15;margin:6px 0 8px;text-wrap:balance}
+.lead{color:var(--muted);margin:0;max-width:52ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:18px}
+label,.lbl{font-weight:600;font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.sumbox{display:inline-flex;align-items:baseline;gap:6px;font-family:var(--display);font-size:22px;font-weight:700;color:var(--green)}
+.sumbox input{width:5.2ch;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:4px 8px;text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--green);height:28px}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:20px;cursor:pointer}
+.stepper output{min-width:2ch;text-align:center;font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
+.toggles{display:grid;gap:10px}
+.tg{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.tg input{width:20px;height:20px;accent-color:var(--green);margin-top:2px;flex:none}
+.tg small{display:block;color:var(--muted);font-weight:400}
+button:focus-visible,input:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+
+/* scale */
+.scale{position:relative;padding-top:34px;padding-bottom:34px}
+.track{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--bronze));border-radius:99px;transition:width .35s ease}
+.mark{position:absolute;top:0;transform:translateX(-50%);text-align:center;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mark i{display:block;width:2px;height:14px;background:var(--locked);margin:4px auto 0}
+.mark.low{top:auto;bottom:0}
+.mark.low i{margin:0 auto 4px}
+.mark.on{color:var(--green);font-weight:700}
+.mark.on i{background:var(--green)}
+.next{margin:0;font-weight:600}
+.next b{color:var(--bronze)}
+
+/* perks */
+.perks{display:grid;gap:10px}
+.perk{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);transition:background .25s,border-color .25s}
+.perk .ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:var(--bg);filter:grayscale(1);opacity:.55}
+.perk h3{margin:0;font-size:15px}
+.perk p{margin:0;color:var(--muted);font-size:13px}
+.perk .st{font-size:12px;font-weight:700;white-space:nowrap;color:var(--muted)}
+.perk.on{background:var(--green-soft);border-color:var(--green)}
+.perk.on .ic{filter:none;opacity:1;background:var(--surface)}
+.perk.on .st{color:var(--green)}
+.perk.best{background:var(--bronze-soft);border-color:var(--bronze)}
+.perk.best .st{color:var(--bronze)}
+.codes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.code{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:13px;letter-spacing:.04em}
+.code button{font:600 12px var(--body);padding:4px 10px;border-radius:8px;border:1px solid var(--bronze);background:transparent;color:var(--bronze);cursor:pointer}
+.total{display:grid;gap:4px;padding:16px 18px;border-radius:16px;background:var(--green);color:var(--surface)}
+.total .big{font-family:var(--display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.total small{opacity:.85}
+.note{font-size:13px;color:var(--muted);margin:0}
+.bill{display:grid;gap:6px;margin-top:6px}
+.bill div{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.bill .tot{font-family:var(--display);font-size:24px;font-weight:700;border-top:1px solid rgba(255,255,255,.35);padding-top:8px;margin-top:2px}
+.note a{color:var(--green)}
+@media (prefers-reduced-motion:reduce){.fill,.perk{transition:none}}
+@media (max-width:420px){.perk{grid-template-columns:36px 1fr}.perk .st{grid-column:2}}
+.sec h2{font-family:var(--display);font-size:18px;margin:0 0 4px}
+.sec .sub{color:var(--muted);font-size:14px;margin:0 0 10px}
+.shops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.shops{grid-template-columns:1fr}}
+.shop{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:12px 16px;border-radius:14px;font-weight:700;text-decoration:none;border:2px solid var(--green);color:var(--green);background:var(--surface)}
+.shop.main{background:var(--green);color:var(--surface)}
+.shop:hover{filter:brightness(1.08)}
+.shop:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.pick{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:14px;font-weight:600;cursor:pointer}
+.pick input{width:18px;height:18px;accent-color:var(--green)}
+</style></head><body>
+
+<main class="wrap">
+  <header>
+    <div class="brand">FORMIKA · силіконові молди</div>
+    <h1>Що дає твоє замовлення</h1>
+    <p class="lead">Вкажи орієнтовну суму і кількість молдів. Нижче побачиш, як заплатити менше і що покладу в посилку в подарунок.</p>
+  </header>
+
+  <section class="panel" aria-label="Твоє замовлення">
+    <div>
+      <div class="row"><label for="sumIn">Орієнтовна сума замовлення</label><span class="sumbox"><input type="number" id="sumIn" inputmode="numeric" min="0" step="1" value="620" aria-label="Сума замовлення, грн"><span>грн</span></span></div>
+      <input type="range" id="sum" min="0" max="2000" step="10" value="620" aria-label="Повзунок суми замовлення">
+    </div>
+    <div class="row">
+      <span class="lbl" id="qtyLbl">Кількість молдів</span>
+      <div class="stepper" role="group" aria-labelledby="qtyLbl">
+        <button type="button" id="minus" aria-label="Менше">−</button>
+        <output id="qty">2</output>
+        <button type="button" id="plus" aria-label="Більше">+</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Шкала бонусів">
+    <div class="scale" id="scale">
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </div>
+    <p class="next" id="next" aria-live="polite"></p>
+  </section>
+
+  <section class="sec">
+    <h2>Хочеш зекономити?</h2>
+    <p class="sub">Відміть, що тобі підходить. В одному замовленні діє один промокод, я автоматично беру найбільшу знижку.</p>
+    <div class="perks" id="save"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Подарунки</h2>
+    <p class="sub">Додаються самі, промокод не потрібен.</p>
+    <div class="perks" id="gifts"></div>
+  </section>
+
+  <div class="total" id="total" aria-live="polite"></div>
+
+  <div class="shops">
+    <a class="shop main" href="https://formika.store" target="_blank" rel="noopener">Перейти на formika.store</a>
+    <a class="shop" href="https://littlehobbybus.com.ua" target="_blank" rel="noopener">Перейти на Little Hobby Bus</a>
+  </div>
+  <p class="note">Промокод вводиш при оформленні замовлення на будь-якому з двох сайтів.</p>
+</main>
+
+<script>
+(function(){
+  const MAX=2000, MARKS=[199,300,500,1490];
+  const $=id=>document.getElementById(id);
+  const sum=$("sum"), sumIn=$("sumIn");
+  let qty=2, cur=620, first=false, bee=false, fiore=false;
+  const pos=v=>Math.min(100,v/MAX*100);
+  const fmt=n=>Math.round(n).toLocaleString("uk-UA")+" грн";
+
+  const scale=$("scale");
+  MARKS.forEach((v,i)=>{const d=document.createElement("div");d.className="mark"+(i%2?" low":"");d.dataset.v=v;d.style.left=pos(v)+"%";d.innerHTML=v+"<i></i>";scale.appendChild(d);});
+
+  const codeBtns=list=>`<span class="codes">${list.map(c=>`<span class="code">${c} <button type="button" data-copy="${c}">Копіювати</button></span>`).join("")}</span>`;
+  const card=(p)=>`<div class="perk${p.on?" on":""}${p.best?" best":""}">
+      <div class="ic" aria-hidden="true">${p.ic}</div>
+      <div><h3>${p.title}</h3><p>${p.desc}</p>${p.pick||""}${p.codes?codeBtns(p.codes):""}</div>
+      <div class="st">${p.st}</div></div>`;
+  const pick=(id,label,checked)=>`<label class="pick"><input type="checkbox" data-pick="${id}"${checked?" checked":""}> ${label}</label>`;
+
+  function render(){
+    const s=cur;
+    $("qty").textContent=qty;
+    $("fill").style.width=pos(s)+"%";
+    document.querySelectorAll(".mark").forEach(m=>m.classList.toggle("on",s>=+m.dataset.v));
+
+    const beeOk=bee&&s>=99, fioreOk=fiore&&s>=99, buyOk=qty>=2&&s>=300, helloOk=first&&s>=199;
+    const opts=[
+      {id:"buy2",pct:8,ok:buyOk,name:"BUY2 −8% (від 2 молдів)"},
+      {id:"bee",pct:8,ok:beeOk,name:"be_like_bee −8% (амбасадорка)"},
+      {id:"fiore",pct:8,ok:fioreOk,name:"lo.fiore_ −8% (амбасадорка)"},
+      {id:"hello",pct:4,ok:helloOk,name:"HELLO_FORMIKA −4% (перше замовлення)"}
+    ];
+    const best=opts.filter(o=>o.ok).sort((a,b)=>b.pct-a.pct)[0];
+    const st=(o)=>o.ok?(best&&best.id===o.id?"найвигідніший":"доступно"):"ще ні";
+
+    $("save").innerHTML=[
+      card({ic:"🧩",title:"Від 2 молдів −8%",desc:"2+ молди і сума від 300 грн",on:buyOk,best:best&&best.id==="buy2",codes:["BUY2"],st:st(opts[0])}),
+      card({ic:"🐝",title:"Амбасадорка be_like.bee −8%",desc:"для тих, хто прийшов від be_like.bee, від 99 грн",pick:pick("bee","Я від be_like.bee",bee),on:beeOk,best:best&&best.id==="bee",codes:["be_like_bee"],st:st(opts[1])}),
+      card({ic:"🌿",title:"Амбасадорка lo.fiore_ −8%",desc:"для тих, хто прийшов від lo.fiore_, від 99 грн. Якщо сайт не приймає крапку в коді, бери другий варіант",pick:pick("fiore","Я від lo.fiore_",fiore),on:fioreOk,best:best&&best.id==="fiore",codes:["lo.fiore_","lofiore_"],st:st(opts[2])}),
+      card({ic:"👋",title:"Перше замовлення −4%",desc:"для нових покупців, від 199 грн",pick:pick("first","Це моє перше замовлення",first),on:helloOk,best:best&&best.id==="hello",codes:["HELLO_FORMIKA"],st:st(opts[3])})
+    ].join("");
+
+    const gift=s>=500, ship=s>=1490;
+    $("gifts").innerHTML=[
+      card({ic:"🌸",title:"Боксик з об'ємними сухоцвітами",desc:"до замовлення від 500 грн",on:gift,st:gift?"твій":"від 500 грн"}),
+      card({ic:"📦",title:"Безкоштовна доставка",desc:"у відділення Нової пошти або Укрпошти, від 1490 грн",on:ship,st:ship?"твоя":"від 1490 грн"}),
+      card({ic:"✍️",title:"Листівка, намальована від руки",desc:"кладу в кожну посилку",on:true,st:"завжди"})
+    ].join("");
+
+    const goals=[];
+    if(first&&!helloOk&&!(best&&best.pct>=4)) goals.push({v:199,t:"знижка −4% на перше замовлення"});
+    if(qty>=2&&!buyOk&&!(best&&best.pct>=8)) goals.push({v:300,t:"знижка −8% з кодом BUY2"});
+    if(!gift) goals.push({v:500,t:"в посилку додам боксик із сухоцвітами 🌸"});
+    if(!ship) goals.push({v:1490,t:"доставка буде безкоштовною 📦"});
+    goals.sort((a,b)=>a.v-b.v);
+    let msg;
+    if(qty<2&&s>=300&&!(best&&best.pct>=8)) msg=`Додай ще <b>1 молд</b> — і отримаєш −8% з кодом BUY2.`;
+    else if(goals.length) msg=`Ще <b>${fmt(goals[0].v-s)}</b> — і ${goals[0].t}`;
+    else msg=`Усе відкрито: знижка, подарунок і безкоштовна доставка ✨`;
+    $("next").innerHTML=msg;
+
+    const disc=best?Math.round(s*best.pct/100):0;
+    const extras=[gift?"боксик із сухоцвітами":"",ship?"безкоштовна доставка":"","листівка від руки"].filter(Boolean);
+    $("total").innerHTML=`<small>Підсумок</small>
+      <div class="bill">
+        <div><span>Сума замовлення</span><span>${fmt(s)}</span></div>
+        <div><span>${best?"Знижка: "+best.name:"Знижка"}</span><span>${best?"−"+fmt(disc):"поки немає"}</span></div>
+        <div class="tot"><span>До оплати</span><span>${fmt(s-disc)}</span></div>
+        <div><span>Твоя вигода</span><span>${fmt(disc)}</span></div>
+      </div>
+      <small>У подарунок: ${extras.join(" · ")}</small>`;
+  }
+
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("[data-copy]"); if(!b) return;
+    const t=b.dataset.copy;
+    const done=()=>{b.textContent="Скопійовано";setTimeout(()=>b.textContent="Копіювати",1500)};
+    try{navigator.clipboard.writeText(t).then(done,()=>{b.textContent=t});}catch(_){b.textContent=t}
+  });
+  $("save").addEventListener("change",e=>{
+    const k=e.target.dataset.pick; if(!k) return;
+    if(k==="first") first=e.target.checked;
+    if(k==="bee"){bee=e.target.checked; if(bee) fiore=false;}
+    if(k==="fiore"){fiore=e.target.checked; if(fiore) bee=false;}
+    render();
+  });
+  sum.addEventListener("input",()=>{cur=+sum.value;sumIn.value=cur;render()});
+  sumIn.addEventListener("input",()=>{const v=Math.max(0,Math.round(+sumIn.value||0));cur=v;sum.value=Math.min(MAX,v);render()});
+  $("minus").addEventListener("click",()=>{qty=Math.max(1,qty-1);render()});
+  $("plus").addEventListener("click",()=>{qty=Math.min(20,qty+1);render()});
+  render();
+})();
+</script>
+</body></html>
