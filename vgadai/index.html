@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Вгадай молд · Formika</title>
+<meta name="description" content="4 нові молди Formika під інеєм. Вгадай, що з них виходить, і збери свою добірку.">
+<meta property="og:title" content="Вгадай молд · новинки Formika">
+<meta property="og:description" content="4 нові форми під інеєм. Вгадай, що з них виходить 👀">
+<meta property="og:image" content="https://mi-ksuzi.github.io/formika-feeds/vgadai/img/teaser.jpg">
+<meta name="robots" content="noindex">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one card at a time, like unwrapping ornaments from a box; photo first, answers under it, a small "box" tray of liked molds at the end */
+:root{
+  --bg:#eef1ec; --card:#ffffff; --ink:#18231c; --muted:#5d6a61; --line:#d8dfd6;
+  --pine:#0f5a2c; --pine-soft:#e1ece3; --brass:#a8773c; --brass-soft:#f3e8d8; --miss:#8a5a2b;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111813; --card:#1a231d; --ink:#eaf0eb; --muted:#9fb0a4; --line:#2b372f;
+  --pine:#6fc28c; --pine-soft:#1f3326; --brass:#d7aa6c; --brass-soft:#33281b; --miss:#e0a86c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111813; --card:#1a231d; --ink:#eaf0eb; --muted:#9fb0a4; --line:#2b372f;
+  --pine:#6fc28c; --pine-soft:#1f3326; --brass:#d7aa6c; --brass-soft:#33281b; --miss:#e0a86c; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:520px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:16px}
+.brand{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.dots{display:flex;gap:6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
+.dots i.on{background:var(--pine)}
+.dots i.cur{background:var(--brass)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,6.5vw,32px);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.25;margin:0;text-wrap:balance}
+p{margin:0}
+.muted{color:var(--muted)}
+.photo{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:22px;overflow:hidden;background:var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;filter:blur(8px) saturate(.85);transform:scale(1.05);transition:filter 1s ease, transform 1s ease}
+.photo.open img{filter:none;transform:scale(1)}
+.photo .q{position:absolute;inset:auto 0 0 0;padding:14px 16px;background:linear-gradient(transparent,rgba(0,0,0,.45));color:#fff;font-weight:700;font-size:15px}
+.photo.open .q{opacity:0;transition:opacity .4s}
+.opts{display:grid;gap:10px}
+.opt{font:600 16px var(--body);text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt:hover{border-color:var(--pine)}
+.opt:focus-visible,.btn:focus-visible,.heart:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.opt[disabled]{cursor:default}
+.opt.right{border-color:var(--pine);background:var(--pine-soft)}
+.opt.wrong{border-color:var(--miss);opacity:.7}
+.reveal{display:grid;gap:10px;background:var(--card);border-radius:18px;padding:16px;border:1px solid var(--line)}
+.verdict{font-weight:700;color:var(--pine)}
+.verdict.miss{color:var(--miss)}
+.name{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.3}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15px var(--body);padding:13px 18px;border-radius:14px;border:0;cursor:pointer;text-decoration:none;background:var(--pine);color:var(--card)}
+.btn.ghost{background:transparent;color:var(--pine);border:1.5px solid var(--pine)}
+.btn.wide{width:100%}
+.heart{font:700 15px var(--body);padding:12px 16px;border-radius:14px;border:1.5px solid var(--brass);background:transparent;color:var(--brass);cursor:pointer}
+.heart[aria-pressed="true"]{background:var(--brass);color:var(--card)}
+.picks{display:grid;gap:10px}
+.pick{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px}
+.pick img{width:64px;height:64px;object-fit:cover;border-radius:12px;display:block}
+.pick a{color:var(--ink);font-weight:700;text-decoration:none}
+.pick a:hover{color:var(--pine)}
+.score{font-family:var(--display);font-size:40px;font-weight:700;color:var(--pine);line-height:1}
+.note{font-size:13px;color:var(--muted)}
+.toast{font-size:14px;line-height:1.45;color:var(--ink);background:var(--pine-soft);border:1.5px solid var(--pine);border-radius:14px;padding:12px 14px}
+.toast b{color:var(--pine)}
+@media (prefers-reduced-motion:reduce){.photo img{transition:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+(function(){
+var IMG={"NY-033": "img/NY-033.jpg", "NY-032": "img/NY-032.jpg", "NY-031": "img/NY-031.jpg", "NY-022": "img/NY-022.jpg"};
+var SITE='https://formika.store';
+var M=[
+ {sku:'NY-033',name:'Молд цукерки «Бім-бом»',url:'/shop/silikonoviy-mold-tsukerki-bim-bom-dlya-yalinkovoi-prikrasi-7-sm/',
+  opts:['Цукерка на ялинку','Свічка у формі льодяника','Ручка для шухлядки'],ok:0,
+  line:'Та сама цукерка в блискучій обгортці, яку в дитинстві шукали серед гілок. Тепер вона прозора, і всередині можна сховати сухоцвіт чи блискітки.'},
+ {sku:'NY-032',name:'Молд «Круг» з кристалічним краєм',url:'/shop/silikonoviy-mold-krug-z-kristalichnim-kraem-dlya-yalinkovoi-prikrasi-7-sm/',
+  opts:['Підставка під чашку','Медальйон на ялинку з крижаним краєм','Кришечка для баночки'],ok:1,
+  line:'Край ніби взявся морозом, а в серединку вміщається ціла зимова сцена: ялинка, сніжинки, фото.'},
+ {sku:'NY-031',name:'Молд цукерок «Корівка», 3 форми',url:'/shop/silikonoviy-mold-tsukerki-korivka-dlya-yalinkovih-prikras-3-formi-8-sm/',
+  opts:['Брелоки-цеглинки','Мило ручної роботи','Цукерки «Корівка» на ялинку'],ok:2,
+  line:'Найсмачніша цукерка дитинства, тільки цю вже не з’їси. Три штуки за одну заливку, щоб вистачило на всю ялинку.'},
+ {sku:'NY-022',name:'Молд «Кристалічна бурулька», 11,8 см',url:'/shop/silikonoviy-mold-dlya-yalinkovoi-prikrasi-kristalichna-burulka-118-sm/',
+  opts:['Бурулька на ялинку','Підвіс для люстри','Паличка для коктейлю'],ok:0,
+  line:'Ловить світло гірлянди так, ніби щойно звисала з даху. Довга, гранована, з бантом виглядає як справжня прикраса з бабусиної скрині.'}
+];
+var st={i:-1,score:0,ans:[],liked:{}};
+var app=document.getElementById('app');
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function dots(){var h='<div class="dots" aria-hidden="true">';M.forEach(function(_,k){h+='<i class="'+(k<st.i?'on':(k===st.i?'cur':''))+'"></i>';});return h+'</div>';}
+function head(){return '<div class="brand"><span>Formika · новинки місяця</span>'+(st.i>=0&&st.i<M.length?dots():'')+'</div>';}
+
+function intro(){
+  app.innerHTML=head()+
+  '<div class="photo"><img src="'+IMG['NY-022']+'" alt="Розмите фото нового молда"><div class="q">Що це буде? 👀</div></div>'+
+  '<h1>Цього місяця в майстерні з’явилось 4 нові форми</h1>'+
+  '<p class="muted">Вони поки під інеєм. Вгадай, що з них виходить, і фото проявиться. Сподобалось — тисни «Хочу собі», в кінці буде твоя добірка.</p>'+
+  '<button class="btn wide" id="go">Відгадати</button>';
+  document.getElementById('go').onclick=function(){st.i=0;card();};
+}
+
+function card(){
+  var m=M[st.i];
+  var h=head()+
+  '<div class="photo" id="ph"><img src="'+IMG[m.sku]+'" alt="Фото молда"><div class="q">Що це буде?</div></div>'+
+  '<h2>Що відливають у цьому молді?</h2><div class="opts">';
+  m.opts.forEach(function(o,k){h+='<button class="opt" data-k="'+k+'">'+esc(o)+'</button>';});
+  h+='</div><div id="rv"></div>';
+  app.innerHTML=h;
+  app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){answer(+b.getAttribute('data-k'));};});
+}
+
+function answer(k){
+  var m=M[st.i], ok=k===m.ok;
+  if(ok) st.score++;
+  st.ans[st.i]=ok;
+  document.getElementById('ph').classList.add('open');
+  app.querySelectorAll('.opt').forEach(function(b){var j=+b.getAttribute('data-k');b.disabled=true;if(j===m.ok)b.classList.add('right');else if(j===k)b.classList.add('wrong');});
+  var liked=!!st.liked[m.sku];
+  document.getElementById('rv').innerHTML='<div class="reveal">'+
+    '<div class="verdict'+(ok?'':' miss')+'">'+(ok?'Вгадала! ✨':'Майже. Насправді це «'+esc(m.opts[m.ok])+'» 🙂')+'</div>'+
+    '<div class="name">'+esc(m.name)+'</div><p>'+esc(m.line)+'</p>'+
+    '<div class="row"><button class="heart" id="hrt" aria-pressed="'+liked+'">'+(liked?'♥ У добірці':'♡ Хочу собі')+'</button>'+
+    '<a class="btn ghost" href="'+SITE+m.url+'" target="_blank" rel="noopener">На сайті</a></div>'+
+    '<button class="btn wide" id="nx">'+(st.i<M.length-1?'Далі':'Моя добірка')+'</button></div>';
+  var hb=document.getElementById('hrt');
+  hb.onclick=function(){st.liked[m.sku]=!st.liked[m.sku];var on=!!st.liked[m.sku];hb.setAttribute('aria-pressed',on);hb.textContent=on?'♥ У добірці':'♡ Хочу собі';};
+  document.getElementById('nx').onclick=function(){st.i++; if(st.i<M.length) card(); else final();};
+  document.getElementById('rv').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function listText(arr){return arr.map(function(m){return '• '+m.name+' — '+SITE+m.url;}).join('\n');}
+
+function final(){
+  var arr=M.filter(function(m){return st.liked[m.sku];});
+  var h=head()+'<div class="row" style="align-items:baseline"><span class="score">'+st.score+'/'+M.length+'</span><span class="muted">вгадано</span></div>'+
+    '<h1>'+(st.score===M.length?'Око майстрині 👌':'Тепер ти бачила всі новинки')+'</h1>';
+  if(arr.length){
+    h+='<h2>Твоя добірка</h2><div class="picks">';
+    arr.forEach(function(m){h+='<div class="pick"><img src="'+IMG[m.sku]+'" alt=""><a href="'+SITE+m.url+'" target="_blank" rel="noopener">'+esc(m.name)+'</a></div>';});
+    h+='</div>';
+    var txt='Моя добірка новинок Formika:\n'+listText(arr);
+    var tg='https://t.me/share/url?url='+encodeURIComponent(SITE+'/shop/')+'&text='+encodeURIComponent(txt);
+    h+='<div class="row"><button class="btn" id="sv">Зберегти собі</button>'+
+       '<a class="btn ghost" href="'+tg+'" target="_blank" rel="noopener">У Telegram</a>'+
+       '<button class="btn ghost" id="cp">Скопіювати</button></div>'+
+       '<div class="toast" id="tst" role="status" hidden></div>'+
+       '<p class="note">«Зберегти собі» відкриває меню «Поділитися»: звідти можна покласти добірку в Telegram «Збережене», Google Keep, Нотатки чи Viber. У Telegram обери чат «Збережене».</p>';
+  } else {
+    h+='<p class="muted">Ти нічого не відмітила. Можна пройти ще раз і натиснути «Хочу собі» на тому, що сподобалось.</p>';
+  }
+  h+='<div class="row"><a class="btn wide" href="'+SITE+'/shop/" target="_blank" rel="noopener">Усі молди на сайті</a></div>'+
+     '<button class="btn ghost wide" id="again">Пройти ще раз</button>';
+  app.innerHTML=h;
+  document.getElementById('again').onclick=function(){st={i:-1,score:0,ans:[],liked:st.liked};intro();};
+  if(!arr.length) return;
+  var txt='Моя добірка новинок Formika:\n'+listText(arr);
+  var tst=document.getElementById('tst');
+  function copy(){
+    function ok(){tst.hidden=false;tst.innerHTML='<b>✓ Добірку скопійовано</b><br>Відкрий Telegram → чат «Збережене» (або Google Keep, Нотатки) → натисни і втримай поле вводу → «Вставити».';}
+    try{navigator.clipboard.writeText(txt).then(ok,function(){fallback();});}catch(e){fallback();}
+    function fallback(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){tst.hidden=false;tst.textContent='Не вдалося скопіювати автоматично. Скористайся кнопкою «У Telegram».';}ta.remove();}
+  }
+  document.getElementById('cp').onclick=copy;
+  document.getElementById('sv').onclick=function(){
+    if(navigator.share){navigator.share({title:'Моя добірка Formika',text:txt}).catch(function(err){ if(err&&err.name!=='AbortError') copy(); });}
+    else copy();
+  };
+}
+intro();
+})();
+</script>
+
+</body>
+</html>
