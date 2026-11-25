@@ -84,7 +84,11 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--bronze);outline
 .shop:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
 .pick{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:14px;font-weight:600;cursor:pointer}
 .pick input{width:18px;height:18px;accent-color:var(--green)}
-</style></head><body>
+
+.embed body{background:transparent}
+.embed .wrap{padding-block:8px 8px}
+.embed .shops{display:none}
+</style><script>if(/[?&]embed=1/.test(location.search)){document.documentElement.classList.add("embed");document.documentElement.setAttribute("data-theme","light")}</script></head><body>
 
 <main class="wrap">
   <header>
@@ -228,5 +232,10 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--bronze);outline
   $("plus").addEventListener("click",()=>{qty=Math.min(20,qty+1);render()});
   render();
 })();
+</script>
+<script>
+(function(){if(!document.documentElement.classList.contains("embed")||window.parent===window)return;
+var last=0;function send(){var w=document.querySelector(".wrap");var h=Math.ceil(w.getBoundingClientRect().bottom+window.scrollY);if(h!==last){last=h;parent.postMessage({formikaBonusHeight:h},"*")}}
+new ResizeObserver(send).observe(document.querySelector(".wrap"));window.addEventListener("load",send);setTimeout(send,600)})();
 </script>
 </body></html>
